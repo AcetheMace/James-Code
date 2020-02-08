@@ -10,15 +10,13 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// arm_lift_left        motor         1    
-// arm_lift_right       motor         9
-// lift                 motor         8
-// arm_right            motor         12
-// arm_left             motor         11
-// Right1               motor         10
-// Left1                motor         2
-
+// Left1                motor         2               
+// Right1               motor         10              
+// arm_lift_left        motor         1               
+// arm_lift_right       motor         9               
+// arm_right            motor         12              
+// arm_left             motor         11    
+// lift                 motor         8          
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -65,7 +63,7 @@ void autonomous(void) {
   // Insert autonomous user code here.
   // ..........................................................................
   Left1.spinFor(forward,7,turns,false);
-  Right1.spinFor(forward,7,turns,false);
+  Right1.spinFor(reverse,7,turns,false);
   Left1.spinFor(reverse,3,turns,false);
   Right1.spinFor(forward,3,turns,false);
   
@@ -82,9 +80,9 @@ int liftSpeed =
 int arm_right_liftSpeed = 
     Controller1.ButtonL2.pressing() + Controller1.ButtonL2.pressing();
 int drivetrainLeftSideSpeed = 
-    Controller1.Axis3.position() - Controller1.Axis1.position();
-int drivetrainRightSideSpeed = 
     Controller1.Axis3.position() + Controller1.Axis1.position();
+int drivetrainRightSideSpeed = 
+    Controller1.Axis3.position() - Controller1.Axis1.position();
     void Controller1L1pressing(){
       arm_lift_left.spin(forward); 
       arm_lift_right.spin(reverse);
@@ -146,13 +144,13 @@ void usercontrol(void) {
     // update your motors, etc.
     // ........................................................................
 
-  arm_left.setVelocity(75,percent);
-  arm_right.setVelocity(75,percent);
-  arm_lift_left.setVelocity(75,percent);
-  arm_lift_right.setVelocity(75,percent);
-  lift.setVelocity(75,percent);
+  arm_left.setVelocity(70,percent);
+  arm_right.setVelocity(70,percent);
+  arm_lift_left.setVelocity(70,percent);
+  arm_lift_right.setVelocity(70,percent);
+  lift.setVelocity(70,percent);
 
-  int deadband = 0;
+  int deadband = 5;
 
   while(true) {
     Controller1R1pressing();
@@ -184,7 +182,7 @@ void usercontrol(void) {
     Left1.spin(forward);
     Right1.spin(reverse);
 
-
+    wait(25, msec);
   
   }
 
