@@ -113,7 +113,7 @@ int drivetrainRightSideSpeed =
       arm_right.stop(brakeType::hold);
     }
     void Controller1Xpessing(){
-      lift.spin(forward);
+      lift.spinFor(.75,turns);
       waitUntil(!Controller1.ButtonX.pressing());
       lift.stop(brakeType::hold);
     } 

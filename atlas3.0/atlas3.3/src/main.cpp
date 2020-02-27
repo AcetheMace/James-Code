@@ -13,10 +13,12 @@
 // Left1                motor         2               
 // Right1               motor         10              
 // arm_lift_left        motor         1               
-// arm_lift_right       motor         9               
+              
 // arm_right            motor         12              
 // arm_left             motor         11    
-// lift                 motor         8          
+// lift                 motor         8
+// Left2                motor         3
+// Right2               motor         8          
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -64,9 +66,13 @@ void autonomous(void) {
   // ..........................................................................
   Left1.spinFor(forward,7,turns,false);
   Right1.spinFor(reverse,7,turns,false);
+  Left2.spinFor(forward,7,turns,false);
+  Right2.spinFor(reverse,7,turns,false);
   wait(900,msec);
   Left1.spinFor(reverse,3,turns,false);
   Right1.spinFor(forward,3,turns,false);
+  Left2.spinFor(reverse,3,turns,false);
+  Right2.spinFor(forward,3,turns,false);
   
 }
 int arm_leftSpeed = 
@@ -86,17 +92,13 @@ int drivetrainRightSideSpeed =
     Controller1.Axis3.position() - Controller1.Axis1.position();
     void Controller1L1pressing(){
       arm_lift_left.spin(forward); 
-      arm_lift_right.spin(reverse);
       waitUntil(!Controller1.ButtonL1.pressing());
       arm_lift_left.stop(brakeType::hold);
-      arm_lift_right.stop(brakeType::hold);
     }
      void Controller1L2pressing(){
-      arm_lift_left.spin(reverse); 
-      arm_lift_right.spin(forward);
+      arm_lift_left.spin(reverse);
       waitUntil(!Controller1.ButtonL2.pressing());
       arm_lift_left.stop(brakeType::hold);
-      arm_lift_right.stop(brakeType::hold);;
     } 
     void Controller1R1pressing(){
       arm_left.spin(reverse);
@@ -145,13 +147,6 @@ void usercontrol(void) {
     // update your motors, etc.
     // ........................................................................
 
-  arm_left.setVelocity(75,percent);
-  arm_right.setVelocity(75,percent);
-  arm_lift_left.setVelocity(70,percent);
-  arm_lift_right.setVelocity(90,percent);
-  lift.setVelocity(100,percent);
-  Right1.setVelocity(90, percent);
-  Left1.setVelocity(75,percent);
 
   int deadband = 5;
 
@@ -164,15 +159,17 @@ void usercontrol(void) {
     Controller1L2pressing();
 
     int drivetrainLeftSideSpeed = 
-    Controller1.Axis1.position() - Controller1.Axis3.position();
-    int drivetrainRightSideSpeed = 
     Controller1.Axis1.position() + Controller1.Axis3.position();
+    int drivetrainRightSideSpeed = 
+    Controller1.Axis1.position() - Controller1.Axis3.position();
 
     //This section applies to left motor one and two
     if (abs(drivetrainLeftSideSpeed) < deadband) {
       Left1.setVelocity(0, percent);
+      Left2.setVelocity(0, percent);
     } else{
       Left1.setVelocity(drivetrainLeftSideSpeed, percent);
+      Left2.setVelocity(drivetrainLeftSideSpeed, percent);
     }
 
     //This section applies to right motor one and two
@@ -184,6 +181,8 @@ void usercontrol(void) {
 
     Left1.spin(forward);
     Right1.spin(reverse);
+    Left2.spin(forward);
+    Right2.spin(reverse);
 
     wait(25, msec);
   
