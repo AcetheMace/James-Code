@@ -68,26 +68,8 @@ void autonomous(void) {
   Right1.spinFor(forward,3,turns,false);
   
 }
-<<<<<<< HEAD
-int arm_leftSpeed = 
-    Controller1.ButtonR1.pressing() + Controller1.ButtonR1.pressing();
-
-int arm_rightSpeed = 
-    Controller1.ButtonR2.pressing() + Controller1.ButtonR2.pressing();
-int arm_left_liftSpeed = 
-    Controller1.ButtonL1.pressing() + Controller1.ButtonL1.pressing();
-int liftSpeed = 
-    Controller1.ButtonX.pressing() + Controller1.ButtonX.pressing();
-int arm_right_liftSpeed = 
-    Controller1.ButtonL2.pressing() + Controller1.ButtonL2.pressing();
-int drivetrainLeftSideSpeed = 
-    Controller1.Axis3.position() - Controller1.Axis1.position();
-int drivetrainRightSideSpeed = 
-    Controller1.Axis3.position() + Controller1.Axis1.position();
-=======
 
 
->>>>>>> 6ea9d8e11a2b0ece8d39f7cd9f0177b56f69a5f3
     void Controller1L1pressing(){
       arm_lift_left.spin(forward); 
       arm_lift_right.spin(reverse);
