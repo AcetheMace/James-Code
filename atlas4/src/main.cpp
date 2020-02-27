@@ -64,7 +64,6 @@ void autonomous(void) {
   // ..........................................................................
   Left1.spinFor(forward,7,turns,false);
   Right1.spinFor(reverse,7,turns,false);
-  wait(900,msec);
   Left1.spinFor(reverse,3,turns,false);
   Right1.spinFor(forward,3,turns,false);
   
@@ -161,9 +160,9 @@ void usercontrol(void) {
     Controller1L2pressing();
 
     int drivetrainLeftSideSpeed = 
-    Controller1.Axis1.position() - Controller1.Axis3.position();
+    Controller1.Axis3.position() - Controller1.Axis1.position();
     int drivetrainRightSideSpeed = 
-    Controller1.Axis1.position() + Controller1.Axis3.position();
+    Controller1.Axis3.position() + Controller1.Axis1.position();
 
     //This section applies to left motor one and two
     if (abs(drivetrainLeftSideSpeed) < deadband) {
