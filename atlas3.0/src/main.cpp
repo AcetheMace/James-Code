@@ -10,7 +10,7 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Left1                motor         2               
+// Left1                motor         3             
 // Right1               motor         10              
 // arm_lift_left        motor         1               
 // arm_lift_right       motor         9               
@@ -62,10 +62,11 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  Left1.spinFor(forward,7,turns,false);
-  Right1.spinFor(reverse,7,turns,false);
-  Left1.spinFor(reverse,3,turns,false);
-  Right1.spinFor(forward,3,turns,false);
+  Left1.spinFor(reverse,7,turns,false);
+  Right1.spinFor(forward,7,turns,false);
+  wait(3, seconds);
+  Left1.spinFor(forward,3,turns,false);
+  Right1.spinFor(reverse,3,turns,false);
   
 }
 int arm_leftSpeed = 
@@ -80,9 +81,9 @@ int liftSpeed =
 int arm_right_liftSpeed = 
     Controller1.ButtonL2.pressing() + Controller1.ButtonL2.pressing();
 int drivetrainLeftSideSpeed = 
-    Controller1.Axis3.position() + Controller1.Axis1.position();
-int drivetrainRightSideSpeed = 
     Controller1.Axis3.position() - Controller1.Axis1.position();
+int drivetrainRightSideSpeed = 
+    Controller1.Axis3.position() + Controller1.Axis1.position();
     void Controller1L1pressing(){
       arm_lift_left.spin(forward); 
       arm_lift_right.spin(reverse);
@@ -173,6 +174,7 @@ void usercontrol(void) {
     } else{
       Left1.setVelocity(drivetrainLeftSideSpeed, percent);
     }
+    
 
     //This section applies to right motor one and two
     if (abs(drivetrainRightSideSpeed) < deadband) {

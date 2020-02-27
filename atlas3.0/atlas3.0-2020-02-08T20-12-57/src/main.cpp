@@ -80,9 +80,9 @@ int liftSpeed =
 int arm_right_liftSpeed = 
     Controller1.ButtonL2.pressing() + Controller1.ButtonL2.pressing();
 int drivetrainLeftSideSpeed = 
-    Controller1.Axis3.position() + Controller1.Axis1.position();
-int drivetrainRightSideSpeed = 
     Controller1.Axis3.position() - Controller1.Axis1.position();
+int drivetrainRightSideSpeed = 
+    Controller1.Axis3.position() + Controller1.Axis1.position();
     void Controller1L1pressing(){
       arm_lift_left.spin(forward); 
       arm_lift_right.spin(reverse);
